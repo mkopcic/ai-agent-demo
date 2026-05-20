@@ -1,0 +1,312 @@
+export const resources = {
+    hr: {
+        translation: {
+            common: {
+                appName: 'Hrčak',
+                email: 'Email adresa',
+                password: 'Lozinka',
+                name: 'Ime',
+                save: 'Spremi',
+                saved: 'Spremljeno',
+                delete: 'Izbriši',
+                cancel: 'Odustani',
+                close: 'Zatvori',
+                confirm: 'Potvrdi',
+                loading: 'Učitavanje...',
+                settings: 'Postavke',
+                logout: 'Odjava',
+                dashboard: 'Nadzorna ploča',
+                research: 'Istraživanje',
+                library: 'Biblioteka',
+                chat: 'Chat',
+                repository: 'Repozitorij',
+                documentation: 'Dokumentacija',
+                footer:
+                    'Izgrađeno uz Laravel i Laravel AI SDK. Deployano na Laravel Cloud.',
+                github: 'GitHub:',
+                items: '{{count}} stavki',
+                errorTitle: 'Nešto je pošlo po zlu.',
+                itemCount_one: '{{count}} stavka',
+                itemCount_few: '{{count}} stavke',
+                itemCount_other: '{{count}} stavki',
+            },
+            auth: {
+                loginTitle: 'Prijava na račun',
+                loginDescription:
+                    'Unesi email i lozinku za prijavu u aplikaciju',
+                loginHead: 'Prijava',
+                loginAction: 'Prijavi se',
+                forgotPassword: 'Zaboravljena lozinka?',
+                rememberMe: 'Zapamti me',
+                noAccount: 'Nemaš račun?',
+                signUp: 'Registriraj se',
+                registerTitle: 'Izradi račun',
+                registerDescription:
+                    'Unesi svoje podatke za izradu korisničkog računa',
+                registerHead: 'Registracija',
+                fullName: 'Puno ime',
+                confirmPassword: 'Potvrdi lozinku',
+                createAccount: 'Izradi račun',
+                alreadyRegistered: 'Već imaš račun?',
+                resetPasswordTitle: 'Resetiranje lozinke',
+                resetPasswordDescription:
+                    'Unesi novu lozinku za svoj korisnički račun',
+                forgotPasswordTitle: 'Zaboravljena lozinka',
+                forgotPasswordDescription:
+                    'Unesi email adresu i poslat ćemo ti poveznicu za resetiranje lozinke',
+                sendResetLink: 'Pošalji poveznicu za resetiranje',
+                returnToLogin: 'Ili se vrati na',
+                loginLower: 'prijavu',
+                confirmPasswordTitle: 'Potvrdi lozinku',
+                confirmPasswordDescription:
+                    'Ovo je zaštićeni dio aplikacije. Potvrdi lozinku prije nastavka.',
+                confirmPasswordAction: 'Potvrdi lozinku',
+                verifyEmailTitle: 'Potvrdi email',
+                verifyEmailDescription:
+                    'Provjeri email i klikni poveznicu za potvrdu računa',
+                resendVerification: 'Ponovno pošalji email za potvrdu',
+                twoFactorTitle: 'Dvofaktorska provjera',
+                twoFactorDescription:
+                    'Unesi autentifikacijski kod ili recovery kod za nastavak',
+                code: 'Kod',
+                recoveryCode: 'Recovery kod',
+                useRecoveryCode: 'Koristi recovery kod',
+                useAuthenticationCode: 'Koristi autentifikacijski kod',
+                recoveryCodeTitle: 'Recovery kod',
+                recoveryCodeDescription:
+                    'Potvrdi pristup računu unosom jednog od svojih recovery kodova.',
+                authenticationCodeTitle: 'Autentifikacijski kod',
+                authenticationCodeDescription:
+                    'Unesi autentifikacijski kod iz svoje autentifikacijske aplikacije.',
+                enterRecoveryCode: 'Unesi recovery kod',
+                continue: 'Nastavi',
+                orYouCan: 'ili možeš ',
+                verificationSentRegistration:
+                    'Nova poveznica za potvrdu poslana je na email adresu koju si naveo pri registraciji.',
+            },
+            nav: {
+                navigationMenu: 'Navigacijski izbornik',
+                profile: 'Profil',
+                twoFactorAuth: 'Dvofaktorska autentifikacija',
+                appearance: 'Izgled',
+            },
+            research: {
+                head: 'Istraživanje',
+                breadcrumb: 'Istraživanje',
+                title: 'Research biblioteka',
+                description:
+                    'Spremi i organiziraj istraživački materijal. AI analizira sadržaj za lakše pretraživanje.',
+                stats: 'Statistika biblioteke',
+                totalItems: 'Ukupno stavki',
+                images: 'Slike',
+                documents: 'Dokumenti',
+                urls: 'URL-ovi',
+                searchPlaceholder:
+                    'Pretraži po naslovu, sažetku, bilješkama ili kategoriji...',
+                all: 'Sve',
+                noResults: 'Nema rezultata',
+                noItems: 'Još nema research stavki',
+                noResultsDescription:
+                    'Pokušaj s drugim pojmom za pretragu ili drugom kategorijom.',
+                noItemsDescription:
+                    'Počni spremati slike, dokumente ili URL-ove i izgradi osobnu bazu znanja.',
+                captureContent: 'Dodaj sadržaj',
+                howItWorks: 'Kako radi',
+                stepUpload: 'Uploadaj sliku, dokument ili zalijepi URL',
+                stepAnalyze: 'AI analizira sadržaj koristeći',
+                stepStored: 'Sprema se u',
+                stepQuery: 'Pretražuje se kroz',
+                files: 'Datoteke',
+                dropFiles: 'Povuci datoteke ovdje ili klikni za odabir',
+                fileHint:
+                    'Slike, PDF, DOC i TXT do 20 MB po datoteci (najviše 20 datoteka)',
+                addNote: 'Dodaj bilješku',
+                addFileNote: 'Dodaj bilješku za ovu datoteku...',
+                addUrlNote: 'Dodaj bilješku za ovaj URL...',
+                urlPlaceholder:
+                    'Zalijepi URL-ove odvojene zarezom ili novim redom, ili upiši jedan i pritisni Enter',
+                urlHint:
+                    'Zalijepi više URL-ova odjednom ili upiši jedan i pritisni Enter',
+                analyzing: 'Analiziram...',
+                captureAnalyze: 'Dodaj i analiziraj',
+                captureItems_one: 'Dodaj {{count}} stavku',
+                captureItems_few: 'Dodaj {{count}} stavke',
+                captureItems_other: 'Dodaj {{count}} stavki',
+                fetchFailed: 'Dohvat nije uspio - uploadaj screenshot',
+                analyzingContent: 'Analiziram sadržaj...',
+                deleteConfirm: 'Jesi li siguran da želiš izbrisati ovu stavku?',
+                image: 'Slika',
+                document: 'Dokument',
+                url: 'URL',
+            },
+            chat: {
+                title: 'Chat',
+                newChat: 'Novi chat',
+                headSuffix: 'Chat',
+                conversations: 'Razgovori',
+                askPlaceholder:
+                    'Pitaj nešto o svojoj research biblioteci...',
+                send: 'Pošalji',
+                thinking: 'Razmišljam...',
+                searchKnowledge: 'Pretražujem bazu znanja',
+                searchWeb: 'Pretražujem web',
+                knowledgeBase: 'Baza znanja',
+                webSearch: 'Web pretraga',
+                researchItem: 'Research stavka',
+                searching: 'Pretražujem...',
+                done: 'Gotovo',
+                deleteConversation: 'Izbriši razgovor',
+                deleteConfirm:
+                    'Jesi li siguran da želiš izbrisati ovaj razgovor?',
+                generatingTitle: 'Generiram naslov...',
+                newConversation: 'Novi razgovor',
+                noConversations: 'Još nema razgovora',
+                autoSaved:
+                    'Poruke se automatski spremaju kroz RemembersConversations',
+                startTitle: 'Započni razgovor',
+                startDescription:
+                    'Postavi pitanja o spremljenom research materijalu. Pretražit ću tvoju bazu znanja i web.',
+                hint: 'AI pretražuje tvoju bazu znanja i web',
+                error:
+                    'Žao mi je, došlo je do pogreške pri obradi zahtjeva. Pokušaj ponovno.',
+                usingTool: 'Koristim {{tool}}',
+                suggestionAi: 'Što sam spremio o AI-u?',
+                suggestionRecent: 'Sažmi moje zadnje istraživanje',
+                suggestionConnections: 'Pronađi veze u mojim bilješkama',
+                suggestionThemes: 'Koje su glavne teme u mom istraživanju?',
+                suggestionCompare: 'Usporedi moje spremljene članke',
+                suggestionSavedRecently: 'Što sam nedavno spremio?',
+                suggestionMachineLearning:
+                    'Pronađi istraživanje o strojnom učenju',
+                suggestionTakeaways: 'Koji su glavni zaključci?',
+                suggestionWebDev: 'Prikaži sve o web developmentu',
+                suggestionPatterns:
+                    'Koji se obrasci ponavljaju kroz moje bilješke?',
+                suggestionFindings:
+                    'Sažmi najvažnije nalaze',
+                suggestionTopics:
+                    'Koje teme najčešće istražujem?',
+            },
+            researchShow: {
+                breadcrumb: 'Research',
+                image: 'Slika',
+                document: 'Dokument',
+                url: 'URL',
+                deleteConfirm:
+                    'Jesi li siguran da želiš izbrisati ovu stavku? Ovu radnju nije moguće poništiti.',
+                unknownSize: 'Nepoznata veličina',
+                backToLibrary: 'Natrag na research biblioteku',
+                originalUrl: 'Originalni URL',
+                visit: 'Otvori',
+                download: 'Preuzmi',
+                fetchFailed: 'Dohvat nije uspio',
+                fetchBlocked:
+                    'Web stranica je blokirala automatizirani pristup.',
+                uploadAlternative:
+                    'Uploadaj screenshot ili spremi stranicu kao PDF:',
+                dropFile: 'Povuci datoteku ovdje ili klikni za odabir',
+                fileHint: 'JPG, PNG, GIF, WebP ili PDF do 20 MB',
+                uploading: 'Uploadam...',
+                uploadAnalyze: 'Uploadaj i analiziraj',
+                aiSummary: 'AI sažetak',
+                analysisInProgress: 'Analiza je u tijeku...',
+                editDetails: 'Uredi detalje',
+                title: 'Naslov',
+                notes: 'Bilješke',
+                notesPlaceholder:
+                    'Dodaj osobne bilješke o ovoj stavci...',
+                notesHint:
+                    'Bilješke su uključene u semantičku pretragu',
+                saving: 'Spremam...',
+                saveChanges: 'Spremi izmjene',
+                deleting: 'Brišem...',
+                deleteItem: 'Izbriši stavku',
+            },
+            demo: {
+                poweredBy: 'Pokreće:',
+                laravelDocs: 'Laravel dokumentacija',
+                aiSdkDocs: 'AI SDK dokumentacija',
+            },
+            settings: {
+                title: 'Postavke',
+                description: 'Upravljaj profilom i postavkama računa',
+                profile: 'Profil',
+                profileTitle: 'Postavke profila',
+                profileInformation: 'Podaci profila',
+                profileDescription: 'Ažuriraj ime i email adresu',
+                password: 'Lozinka',
+                passwordTitle: 'Postavke lozinke',
+                updatePassword: 'Ažuriraj lozinku',
+                passwordDescription:
+                    'Koristi dugu i nasumičnu lozinku kako bi račun ostao siguran',
+                currentPassword: 'Trenutna lozinka',
+                newPassword: 'Nova lozinka',
+                savePassword: 'Spremi lozinku',
+                twoFactor: 'Dvofaktorska autentifikacija',
+                appearance: 'Izgled',
+                appearanceTitle: 'Postavke izgleda',
+                appearanceDescription: 'Ažuriraj izgled svog računa',
+                hints: 'Savjeti',
+                hintsDescription:
+                    'Prikaži ili sakrij korisne savjete kroz aplikaciju',
+                light: 'Svijetlo',
+                dark: 'Tamno',
+                system: 'Sustav',
+                show: 'Prikaži',
+                hide: 'Sakrij',
+                emailUnverified: 'Tvoja email adresa nije potvrđena.',
+                resendVerification:
+                    'Klikni ovdje za ponovno slanje emaila za potvrdu.',
+                verificationSent:
+                    'Nova poveznica za potvrdu poslana je na tvoju email adresu.',
+                deleteAccount: 'Izbriši račun',
+                deleteAccountDescription:
+                    'Izbriši svoj račun i sve povezane resurse',
+                warning: 'Upozorenje',
+                deleteWarning:
+                    'Nastavi oprezno, ovu radnju nije moguće poništiti.',
+                deleteConfirmTitle:
+                    'Jesi li siguran da želiš izbrisati svoj račun?',
+                deleteConfirmDescription:
+                    'Nakon brisanja računa svi povezani resursi i podaci bit će trajno izbrisani. Unesi lozinku za potvrdu trajnog brisanja računa.',
+                twoFactorTitle: 'Dvofaktorska autentifikacija',
+                twoFactorSettings: 'Postavke dvofaktorske autentifikacije',
+                twoFactorDescription:
+                    'Upravljaj postavkama dvofaktorske autentifikacije',
+                enabled: 'Omogućeno',
+                disabled: 'Onemogućeno',
+                twoFactorEnabledDescription:
+                    'Kada je dvofaktorska autentifikacija uključena, pri prijavi ćeš unijeti sigurni nasumični PIN iz TOTP aplikacije na telefonu.',
+                twoFactorDisabledDescription:
+                    'Kada uključiš dvofaktorsku autentifikaciju, pri prijavi ćeš unijeti sigurni PIN iz TOTP aplikacije na telefonu.',
+                disable2fa: 'Onemogući 2FA',
+                enable2fa: 'Omogući 2FA',
+                continueSetup: 'Nastavi postavljanje',
+                recoveryCodes: '2FA recovery kodovi',
+                recoveryCodesDescription:
+                    'Recovery kodovi omogućuju pristup računu ako izgubiš 2FA uređaj. Spremi ih u sigurni password manager.',
+                viewRecoveryCodes: 'Prikaži recovery kodove',
+                hideRecoveryCodes: 'Sakrij recovery kodove',
+                regenerateCodes: 'Generiraj nove kodove',
+                recoveryCodesLabel: 'Recovery kodovi',
+                loadingRecoveryCodes: 'Učitavam recovery kodove',
+                regenerateWarning:
+                    'Svaki recovery kod može se iskoristiti jednom za pristup računu i nakon korištenja se uklanja. Ako trebaš nove, klikni',
+                twoFactorEnabledModalTitle:
+                    'Dvofaktorska autentifikacija je omogućena',
+                twoFactorEnabledModalDescription:
+                    'Dvofaktorska autentifikacija je sada uključena. Skeniraj QR kod ili unesi setup ključ u autentifikacijsku aplikaciju.',
+                verifyAuthenticationCode:
+                    'Potvrdi autentifikacijski kod',
+                verifyAuthenticationCodeDescription:
+                    'Unesi šesteroznamenkasti kod iz autentifikacijske aplikacije',
+                enableTwoFactorModalTitle:
+                    'Omogući dvofaktorsku autentifikaciju',
+                enableTwoFactorModalDescription:
+                    'Za dovršetak postavljanja skeniraj QR kod ili unesi setup ključ u autentifikacijsku aplikaciju.',
+                enterCodeManually: 'ili ručno unesi kod',
+                back: 'Natrag',
+            },
+        },
+    },
+} as const;
