@@ -1,4 +1,4 @@
 [mcp_servers.laravel-boost]
 command = "php"
 args = ["artisan", "boost:mcp"]
-cwd = "/Users/josh/Code/larrykonn"
+cwd = "/home/mellonwe/hrcak.mellon.hr"

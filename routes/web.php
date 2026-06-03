@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\ResearchController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,6 +18,10 @@ Route::get('dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('logs', [LogController::class, 'index'])->name('logs.index');
+    Route::get('api/logs/files', [LogController::class, 'files'])->name('logs.files');
+    Route::get('api/logs/entries', [LogController::class, 'entries'])->name('logs.entries');
+
     Route::get('research', [ResearchController::class, 'index'])->name('research.index');
     Route::post('research', [ResearchController::class, 'store'])->name('research.store');
     Route::post('research/bulk', [ResearchController::class, 'bulkStore'])->name('research.bulk-store');

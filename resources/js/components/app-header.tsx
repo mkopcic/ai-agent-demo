@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Menu, MessageSquare } from 'lucide-react';
+import { BookOpen, List, Menu, MessageSquare } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -52,6 +52,11 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
             title: t('common.chat'),
             href: research.chat(),
             icon: MessageSquare,
+        },
+        {
+            title: 'Logovi',
+            href: '/logs',
+            icon: List,
         },
     ];
 

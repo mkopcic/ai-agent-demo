@@ -1,9 +1,9 @@
 {
     "agents": [
-        "cursor",
         "opencode",
         "claude_code",
-        "codex"
+        "codex",
+        "copilot"
     ],
     "guidelines": true,
     "herd_mcp": false,
