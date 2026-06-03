@@ -18,11 +18,11 @@ export default function AppHeaderLayout({
                 {t('common.footer')} {t('common.github')}{' '}
                 <a
                     className="font-medium underline underline-offset-4 hover:text-foreground"
-                    href="https://github.com/mkopcic/laravel-ai-agent-demo"
+                    href="https://github.com/mkopcic/ai-agent-demo"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    mkopcic/laravel-ai-agent-demo
+                    mkopcic/ai-agent-demo
                 </a>
             </footer>
         </AppShell>

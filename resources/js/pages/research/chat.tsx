@@ -6,6 +6,7 @@ import {
     ChevronRight,
     ExternalLink,
     Globe,
+    KeyRound,
     Loader2,
     MessageSquare,
     Plus,
@@ -59,6 +60,7 @@ interface PageProps {
     currentConversation: Conversation | null;
     messages: Message[];
     fileMap: Record<string, string>;
+    hasApiKey: boolean;
     flash?: { success?: string };
 }
 
@@ -483,7 +485,7 @@ function useRotatingSuggestions(
 
 export default function ResearchChat() {
     const { t } = useTranslation();
-    const { conversations, currentConversation, messages, fileMap, flash } =
+    const { conversations, currentConversation, messages, fileMap, hasApiKey, flash } =
         usePage<PageProps>().props;
     const { hintsEnabled } = useHints();
 
@@ -837,182 +839,224 @@ export default function ResearchChat() {
 
                 {/* Main Chat Area */}
                 <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
-                    {/* Feature Badges Header */}
-                    {hintsEnabled && (
-                        <div className="shrink-0 border-b border-border/50 bg-muted/10 px-4 py-3">
-                            <FeatureBadgeGroup
-                                features={[
-                                    'agent',
-                                    'streaming',
-                                    'file-search',
-                                    'web-search',
-                                ]}
-                                className="justify-center"
-                            />
-                        </div>
-                    )}
-
-                    {flash?.success && (
-                        <div className="border-b border-green-500/20 bg-green-500/10 px-4 py-2 text-sm text-green-600 dark:text-green-400">
-                            {flash.success}
-                        </div>
-                    )}
-
-                    {/* Messages */}
-                    <div className="flex-1 overflow-y-auto p-6">
-                        {localMessages.length === 0 && !isStreaming ? (
-                            <div className="flex h-full flex-col items-center justify-center text-center">
-                                <div className="flex size-16 items-center justify-center rounded-full bg-gradient-to-br from-violet-500/20 to-indigo-600/20">
-                                    <Sparkles className="size-8 text-violet-500" />
-                                </div>
-                                <h3 className="mt-4 text-xl font-semibold text-foreground">
-                                    {t('chat.startTitle')}
-                                </h3>
-                                <p className="mt-2 max-w-sm text-muted-foreground">
-                                    {t('chat.startDescription')}
-                                </p>
-                                <div
-                                    className={`mt-6 flex flex-wrap justify-center gap-2 transition-all duration-300 ${
-                                        suggestionsVisible
-                                            ? 'translate-y-0 opacity-100'
-                                            : 'translate-y-1 opacity-0'
-                                    }`}
-                                >
-                                    {suggestions.map((suggestion) => (
-                                        <button
-                                            key={suggestion}
-                                            type="button"
-                                            onClick={() => setInput(suggestion)}
-                                            className="rounded-full border border-border/50 bg-muted/30 px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-border hover:bg-muted hover:text-foreground"
-                                        >
-                                            {suggestion}
-                                        </button>
-                                    ))}
-                                </div>
+                    {!hasApiKey ? (
+                        <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8 text-center">
+                            <div className="flex size-16 items-center justify-center rounded-full bg-muted">
+                                <KeyRound className="size-8 text-muted-foreground" />
                             </div>
-                        ) : (
-                            <div className="mx-auto max-w-3xl space-y-6">
-                                {localMessages.map((message) => {
-                                    const serverMsg = messages.find(
-                                        (m) => m.id === message.id,
-                                    );
-                                    const msgTools = serverMsg
-                                        ? parseToolCalls(serverMsg.tool_calls)
-                                        : [];
+                            <div className="max-w-sm space-y-2">
+                                <h3 className="text-lg font-semibold">
+                                    {t('chat.noApiKeyTitle')}
+                                </h3>
+                                <p className="text-sm text-muted-foreground">
+                                    {t('chat.noApiKeyDescription')}
+                                </p>
+                            </div>
+                            <Link
+                                href="/settings/api-keys"
+                                className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+                            >
+                                <KeyRound className="size-4" />
+                                {t('chat.noApiKeyAction')}
+                            </Link>
+                        </div>
+                    ) : (
+                        <>
+                            {/* Feature Badges Header */}
+                            {hintsEnabled && (
+                                <div className="shrink-0 border-b border-border/50 bg-muted/10 px-4 py-3">
+                                    <FeatureBadgeGroup
+                                        features={[
+                                            'agent',
+                                            'streaming',
+                                            'file-search',
+                                            'web-search',
+                                        ]}
+                                        className="justify-center"
+                                    />
+                                </div>
+                            )}
 
-                                    return (
-                                        <MessageBubble
-                                            key={message.id}
-                                            role={message.role}
-                                            content={message.content}
-                                            tools={msgTools}
-                                        />
-                                    );
-                                })}
+                            {flash?.success && (
+                                <div className="border-b border-green-500/20 bg-green-500/10 px-4 py-2 text-sm text-green-600 dark:text-green-400">
+                                    {flash.success}
+                                </div>
+                            )}
 
-                                {isStreaming && streamParsed && (
-                                    <>
-                                        {streamParsed.tools.length > 0 &&
-                                            !streamParsed.text && (
-                                                <div className="flex gap-4">
-                                                    <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-indigo-600 text-white">
-                                                        <Bot className="size-4" />
-                                                    </div>
-                                                    <div className="max-w-[80%] space-y-1.5">
-                                                        {streamParsed.tools.map(
-                                                            (tool) => (
-                                                                <ToolCallCard
-                                                                    key={
-                                                                        tool.id
-                                                                    }
-                                                                    tool={tool}
-                                                                    isLive
-                                                                />
-                                                            ),
-                                                        )}
-                                                    </div>
+                            {/* Messages */}
+                            <div className="flex-1 overflow-y-auto p-6">
+                                {localMessages.length === 0 && !isStreaming ? (
+                                    <div className="flex h-full flex-col items-center justify-center text-center">
+                                        <div className="flex size-16 items-center justify-center rounded-full bg-gradient-to-br from-violet-500/20 to-indigo-600/20">
+                                            <Sparkles className="size-8 text-violet-500" />
+                                        </div>
+                                        <h3 className="mt-4 text-xl font-semibold text-foreground">
+                                            {t('chat.startTitle')}
+                                        </h3>
+                                        <p className="mt-2 max-w-sm text-muted-foreground">
+                                            {t('chat.startDescription')}
+                                        </p>
+                                        <div
+                                            className={`mt-6 flex flex-wrap justify-center gap-2 transition-all duration-300 ${
+                                                suggestionsVisible
+                                                    ? 'translate-y-0 opacity-100'
+                                                    : 'translate-y-1 opacity-0'
+                                            }`}
+                                        >
+                                            {suggestions.map((suggestion) => (
+                                                <button
+                                                    key={suggestion}
+                                                    type="button"
+                                                    onClick={() =>
+                                                        setInput(suggestion)
+                                                    }
+                                                    className="rounded-full border border-border/50 bg-muted/30 px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-border hover:bg-muted hover:text-foreground"
+                                                >
+                                                    {suggestion}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="mx-auto max-w-3xl space-y-6">
+                                        {localMessages.map((message) => {
+                                            const serverMsg = messages.find(
+                                                (m) => m.id === message.id,
+                                            );
+                                            const msgTools = serverMsg
+                                                ? parseToolCalls(
+                                                      serverMsg.tool_calls,
+                                                  )
+                                                : [];
+
+                                            return (
+                                                <MessageBubble
+                                                    key={message.id}
+                                                    role={message.role}
+                                                    content={message.content}
+                                                    tools={msgTools}
+                                                />
+                                            );
+                                        })}
+
+                                        {isStreaming && streamParsed && (
+                                            <>
+                                                {streamParsed.tools.length >
+                                                    0 &&
+                                                    !streamParsed.text && (
+                                                        <div className="flex gap-4">
+                                                            <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-indigo-600 text-white">
+                                                                <Bot className="size-4" />
+                                                            </div>
+                                                            <div className="max-w-[80%] space-y-1.5">
+                                                                {streamParsed.tools.map(
+                                                                    (tool) => (
+                                                                        <ToolCallCard
+                                                                            key={
+                                                                                tool.id
+                                                                            }
+                                                                            tool={
+                                                                                tool
+                                                                            }
+                                                                            isLive
+                                                                        />
+                                                                    ),
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    )}
+
+                                                {streamParsed.text && (
+                                                    <MessageBubble
+                                                        role="assistant"
+                                                        content={
+                                                            streamParsed.text
+                                                        }
+                                                        tools={
+                                                            streamParsed.tools
+                                                        }
+                                                        citations={
+                                                            streamParsed.citations
+                                                        }
+                                                        isStreaming
+                                                    />
+                                                )}
+                                            </>
+                                        )}
+
+                                        {(isStreaming || isFetching) &&
+                                            !streamParsed?.text &&
+                                            !streamParsed?.tools.length && (
+                                                <div className="flex items-center gap-3 text-muted-foreground">
+                                                    <Loader2 className="size-5 animate-spin" />
+                                                    <span>
+                                                        {t('chat.thinking')}
+                                                    </span>
                                                 </div>
                                             )}
 
-                                        {streamParsed.text && (
-                                            <MessageBubble
-                                                role="assistant"
-                                                content={streamParsed.text}
-                                                tools={streamParsed.tools}
-                                                citations={
-                                                    streamParsed.citations
-                                                }
-                                                isStreaming
-                                            />
-                                        )}
-                                    </>
+                                        <div ref={messagesEndRef} />
+                                    </div>
                                 )}
-
-                                {(isStreaming || isFetching) &&
-                                    !streamParsed?.text &&
-                                    !streamParsed?.tools.length && (
-                                        <div className="flex items-center gap-3 text-muted-foreground">
-                                            <Loader2 className="size-5 animate-spin" />
-                                            <span>{t('chat.thinking')}</span>
-                                        </div>
-                                    )}
-
-                                <div ref={messagesEndRef} />
                             </div>
-                        )}
-                    </div>
 
-                    {/* Input */}
-                    <div className="shrink-0 border-t border-border/50 bg-background/80 p-4 backdrop-blur-sm">
-                        <form
-                            ref={formRef}
-                            onSubmit={handleSubmit}
-                            className="mx-auto max-w-3xl"
-                        >
-                            <div className="relative flex items-end gap-3 rounded-2xl border border-border/50 bg-muted/30 p-2 transition-colors focus-within:border-border focus-within:bg-muted/50">
-                                <textarea
-                                    ref={textareaRef}
-                                    value={input}
-                                    onChange={(e) => setInput(e.target.value)}
-                                    onKeyDown={handleKeyDown}
-                                    placeholder={t('chat.askPlaceholder')}
-                                    rows={1}
-                                    className="max-h-32 min-h-[40px] flex-1 resize-none bg-transparent px-2 py-2 text-foreground placeholder:text-muted-foreground focus:outline-none"
-                                    style={{
-                                        height: 'auto',
-                                        minHeight: '40px',
-                                    }}
-                                    onInput={(e) => {
-                                        const target =
-                                            e.target as HTMLTextAreaElement;
-                                        target.style.height = 'auto';
-                                        target.style.height = `${Math.min(target.scrollHeight, 128)}px`;
-                                    }}
-                                />
-                                <Button
-                                    type="submit"
-                                    size="icon"
-                                    disabled={
-                                        !input.trim() ||
-                                        isStreaming ||
-                                        isFetching
-                                    }
-                                    className="size-10 shrink-0 rounded-xl"
+                            {/* Input */}
+                            <div className="shrink-0 border-t border-border/50 bg-background/80 p-4 backdrop-blur-sm">
+                                <form
+                                    ref={formRef}
+                                    onSubmit={handleSubmit}
+                                    className="mx-auto max-w-3xl"
                                 >
-                                    {isStreaming || isFetching ? (
-                                        <Loader2 className="size-4 animate-spin" />
-                                    ) : (
-                                        <Send className="size-4" />
+                                    <div className="relative flex items-end gap-3 rounded-2xl border border-border/50 bg-muted/30 p-2 transition-colors focus-within:border-border focus-within:bg-muted/50">
+                                        <textarea
+                                            ref={textareaRef}
+                                            value={input}
+                                            onChange={(e) =>
+                                                setInput(e.target.value)
+                                            }
+                                            onKeyDown={handleKeyDown}
+                                            placeholder={t(
+                                                'chat.askPlaceholder',
+                                            )}
+                                            rows={1}
+                                            className="max-h-32 min-h-[40px] flex-1 resize-none bg-transparent px-2 py-2 text-foreground placeholder:text-muted-foreground focus:outline-none"
+                                            style={{
+                                                height: 'auto',
+                                                minHeight: '40px',
+                                            }}
+                                            onInput={(e) => {
+                                                const target =
+                                                    e.target as HTMLTextAreaElement;
+                                                target.style.height = 'auto';
+                                                target.style.height = `${Math.min(target.scrollHeight, 128)}px`;
+                                            }}
+                                        />
+                                        <Button
+                                            type="submit"
+                                            size="icon"
+                                            disabled={
+                                                !input.trim() ||
+                                                isStreaming ||
+                                                isFetching
+                                            }
+                                            className="size-10 shrink-0 rounded-xl"
+                                        >
+                                            {isStreaming || isFetching ? (
+                                                <Loader2 className="size-4 animate-spin" />
+                                            ) : (
+                                                <Send className="size-4" />
+                                            )}
+                                        </Button>
+                                    </div>
+                                    {hintsEnabled && (
+                                        <p className="mt-2 text-center text-xs text-muted-foreground">
+                                            {t('chat.hint')}
+                                        </p>
                                     )}
-                                </Button>
+                                </form>
                             </div>
-                            {hintsEnabled && (
-                                <p className="mt-2 text-center text-xs text-muted-foreground">
-                                    {t('chat.hint')}
-                                </p>
-                            )}
-                        </form>
-                    </div>
+                        </>
+                    )}
                 </div>
             </div>
         </AppLayout>

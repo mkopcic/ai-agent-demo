@@ -47,7 +47,7 @@ export function AppSidebar() {
     const footerNavItems: NavItem[] = [
         {
             title: t('common.repository'),
-            href: 'https://github.com/mkopcic/laravel-ai-agent-demo',
+            href: 'https://github.com/mkopcic/ai-agent-demo',
             icon: Folder,
         },
         {

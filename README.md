@@ -56,6 +56,7 @@ composer run dev
 
 - 🧠 Laravel AI SDK: https://laravel.com/ai
 - ☁️ Laravel Cloud: https://laravel.com/cloud
+- 🌍 App: https://hrcak.mellon.hr
 - 📦 Repo: https://github.com/mkopcic/ai-agent-demo
 
 Built with ❤️ using Laravel & Laravel AI SDK. Deployed on Laravel Cloud.

@@ -21,6 +21,7 @@ class ConversationController extends Controller
     public function index(Request $request): Response
     {
         $user = $request->user();
+        $hasApiKey = $user->hasOpenAiKey() || ! empty(config('ai.providers.openai.key'));
         $conversationId = $request->get('conversation');
 
         $conversations = DB::table('agent_conversations')
@@ -56,6 +57,7 @@ class ConversationController extends Controller
             'currentConversation' => $currentConversation,
             'messages' => $messages,
             'fileMap' => $fileMap,
+            'hasApiKey' => $hasApiKey,
         ]);
     }
 
@@ -64,6 +66,17 @@ class ConversationController extends Controller
         set_time_limit(0);
 
         $user = $request->user();
+
+        if ($user->hasOpenAiKey()) {
+            config(['ai.providers.openai.key' => $user->openai_api_key]);
+        }
+
+        abort_unless(
+            $user->hasOpenAiKey() || ! empty(config('ai.providers.openai.key')),
+            422,
+            __('OpenAI API ključ nije postavljen. Postavi ga u postavkama računa.')
+        );
+
         $message = $request->validated('message');
         $conversationId = $request->validated('conversation_id');
 

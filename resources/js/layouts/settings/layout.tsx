@@ -36,6 +36,11 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
             href: editAppearance(),
             icon: null,
         },
+        {
+            title: t('settings.apiKeys'),
+            href: '/settings/api-keys',
+            icon: null,
+        },
     ];
 
     // When server-side rendering, we only render the layout on the client...

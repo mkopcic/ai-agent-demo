@@ -166,6 +166,10 @@ export const resources = {
                 startTitle: 'Započni razgovor',
                 startDescription:
                     'Postavi pitanja o spremljenom research materijalu. Pretražit ću tvoju bazu znanja i web.',
+                noApiKeyTitle: 'API ključ nije postavljen',
+                noApiKeyDescription:
+                    'Za korištenje chata potrebno je postaviti OpenAI API ključ u postavkama računa.',
+                noApiKeyAction: 'Postavi API ključ',
                 hint: 'AI pretražuje tvoju bazu znanja i web',
                 error:
                     'Žao mi je, došlo je do pogreške pri obradi zahtjeva. Pokušaj ponovno.',
@@ -230,6 +234,17 @@ export const resources = {
             settings: {
                 title: 'Postavke',
                 description: 'Upravljaj profilom i postavkama računa',
+                apiKeys: 'API ključevi',
+                apiKeysTitle: 'Postavke API ključeva',
+                apiKeysDescription: 'Postavi API ključeve za korištenje AI značajki',
+                openAiKey: 'OpenAI API ključ',
+                openAiKeyDescription: 'Ključ se koristi za chat, analizu i pretraživanje sadržaja.',
+                openAiKeyPlaceholder: 'sk-...',
+                openAiKeyHint: 'Ključ se šifrira i sigurno sprema. Ostavi prazno za uklanjanje ključa.',
+                openAiKeySet: 'API ključ je postavljen',
+                openAiKeyNotSet: 'API ključ nije postavljen',
+                saveApiKey: 'Spremi ključ',
+                apiKeySaved: 'API ključ je uspješno pohranjen',
                 profile: 'Profil',
                 profileTitle: 'Postavke profila',
                 profileInformation: 'Podaci profila',

@@ -25,6 +25,7 @@ class User extends Authenticatable
         'email',
         'password',
         'vector_store_id',
+        'openai_api_key',
     ];
 
     /**
@@ -37,6 +38,7 @@ class User extends Authenticatable
         'two_factor_secret',
         'two_factor_recovery_codes',
         'remember_token',
+        'openai_api_key',
     ];
 
     /**
@@ -50,6 +52,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
+            'openai_api_key' => 'encrypted',
         ];
     }
 
@@ -64,5 +67,10 @@ class User extends Authenticatable
     public function hasVectorStore(): bool
     {
         return $this->vector_store_id !== null;
+    }
+
+    public function hasOpenAiKey(): bool
+    {
+        return ! empty($this->openai_api_key);
     }
 }
